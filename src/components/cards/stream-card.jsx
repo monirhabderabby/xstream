@@ -1,6 +1,11 @@
+import Link from "next/link";
+
 const StreamCard = ({ data }) => {
   return (
-    <div class="rounded-lg overflow-hidden bg-color-gray">
+    <Link
+      href={`/videos/${data.videoId}`}
+      class="rounded-lg overflow-hidden bg-color-gray"
+    >
       <img
         src={data?.thumbnail}
         alt="Stream 1"
@@ -10,7 +15,7 @@ const StreamCard = ({ data }) => {
         <p class="font-semibold">{data?.title}</p>
         <p class="text-sm text-gray-400">{data?.channelTitle}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 
