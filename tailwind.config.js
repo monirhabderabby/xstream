@@ -13,8 +13,8 @@ module.exports = {
         "color-gray": "#2E2E2E",
       },
       fontFamily: {
-        exo: ['"Exo 2"', "sans-serif"],
-        play: ['"Play"', "serif"],
+        exo: ["var(--font-exo)"],
+        play: ["var(--font-play)"],
       },
     },
   },

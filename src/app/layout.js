@@ -1,5 +1,16 @@
-import Navbar from "@/components/navbar";
+import { Exo_2, Play } from "next/font/google";
 import "./globals.css";
+
+const ex2 = Exo_2({
+  subsets: ["latin"],
+  variable: "--font-exo",
+});
+
+const play = Play({
+  subsets: ["latin"],
+  variable: "--font-play",
+  weight: ["400", "700"],
+});
 
 export const metadata = {
   title: "LWS Xstream - Video Streaming",
@@ -9,21 +20,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="bg-color-bg text-white font-exo">
-        <div className="container mx-auto px-4 py-4">
-          <Navbar />
-          {children}
-        </div>
+      <body
+        className={`bg-color-bg text-white font-exo ${ex2.className} ${play.className}`}
+      >
+        <div className="container mx-auto px-4 py-4">{children}</div>
       </body>
     </html>
   );

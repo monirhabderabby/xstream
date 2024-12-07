@@ -1,7 +1,9 @@
+import { getDictionary } from "@/app/[lang]/dictionaries/dictionaries";
 import Link from "next/link";
 import { icons } from "./icons";
 
-const Navbar = () => {
+const Navbar = async ({ lang }) => {
+  const dictionary = await getDictionary(lang);
   return (
     <header className="flex justify-between items-center mb-8">
       <div className="flex items-center space-x-8">
@@ -10,13 +12,13 @@ const Navbar = () => {
         </Link>
         <nav className=" hidden md:flex space-x-6">
           <a href="#" className="text-color-purple font-semibold">
-            TOP STREAMING
+            {dictionary.navItem1}
           </a>
           <a href="#" className="text-gray-400 hover:text-white">
-            GAMES
+            {dictionary.navItem2}
           </a>
           <a href="#" className="text-gray-400 hover:text-white">
-            TEAMS
+            {dictionary.navItem3}
           </a>
         </nav>
       </div>
