@@ -1,10 +1,13 @@
+import Link from "next/link";
 import { icons } from "./icons";
 
 const Navbar = () => {
   return (
     <header className="flex justify-between items-center mb-8">
       <div className="flex items-center space-x-8">
-        <img src="/logo.svg" alt="LWS Xstream Logo" className="h-6" />
+        <Link href="/">
+          <img src="/logo.svg" alt="LWS Xstream Logo" className="h-6" />
+        </Link>
         <nav className=" hidden md:flex space-x-6">
           <a href="#" className="text-color-purple font-semibold">
             TOP STREAMING
