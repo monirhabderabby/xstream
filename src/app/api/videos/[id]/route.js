@@ -1,8 +1,16 @@
+import videos from "@/data/videos.json";
 import { getAllData } from "@/lib/util";
 import { NextResponse } from "next/server";
 
 export async function GET(req, { params }) {
   const videoId = params?.id;
+
+  // If videoId is missing, throw an error
+  if (!videoId) {
+    return new Response(JSON.stringify({ error: "Missing video ID" }), {
+      status: 400,
+    });
+  }
 
   try {
     // Fetch all data
@@ -29,7 +37,7 @@ export async function GET(req, { params }) {
       return NextResponse.json(
         {
           success: false,
-          message: `Video with ID ${videoId} not found.`,
+          message: `Video ID not found.`,
         },
         {
           status: 404,
@@ -60,4 +68,29 @@ export async function GET(req, { params }) {
       }
     );
   }
+}
+
+export async function DELETE(request, { params }) {
+  const videoId = params.id;
+
+  // If videoId is missing, throw an error
+  if (!videoId) {
+    return new Response(JSON.stringify({ error: "Missing video ID" }), {
+      status: 400,
+    });
+  }
+
+  const videoIndex = videos.findIndex((video) => video.videoId == videoId);
+
+  if (!videoIndex) {
+    return new Response(JSON.stringify({ error: "Video ID not found" }), {
+      status: 404,
+    });
+  }
+
+  const videoToDelete = videos[videoIndex];
+
+  videos.splice(videoIndex, 1);
+
+  return Response.json(videoToDelete);
 }
