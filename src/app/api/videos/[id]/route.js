@@ -94,3 +94,54 @@ export async function DELETE(request, { params }) {
 
   return Response.json(videoToDelete);
 }
+
+export async function PATCH(req, { params }) {
+  const videoId = params.id;
+  const body = await req.json();
+
+  // If videoId is missing, throw an error
+  if (!videoId) {
+    return new Response(JSON.stringify({ error: "Missing video ID" }), {
+      status: 400,
+    });
+  }
+
+  // Validate the body to ensure only 'title' or 'description' are present
+  const allowedKeys = ["title", "description"];
+  const invalidKeys = Object.keys(body).filter(
+    (key) => !allowedKeys.includes(key)
+  );
+
+  if (invalidKeys.length > 0) {
+    return new Response(
+      JSON.stringify({
+        error: `Invalid field: ${invalidKeys.join(",").split(" ")}.`,
+      }),
+      {
+        status: 400,
+      }
+    );
+  }
+
+  const videoIndex = videos.findIndex((item) => item.videoId == videoId);
+
+  if (videoIndex === -1) {
+    return new Response(JSON.stringify({ error: "Video ID not found" }), {
+      status: 404,
+    });
+  }
+
+  // updading in the DB
+  videos[videoIndex] = {
+    ...videos[videoIndex],
+    ...body,
+  };
+
+  // Proceed with your logic (e.g., updating the video)
+  return new Response(
+    JSON.stringify({ message: "Update successful", data: videos[videoIndex] }),
+    {
+      status: 200,
+    }
+  );
+}
