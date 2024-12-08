@@ -1,6 +1,7 @@
 import { getDictionary } from "@/app/[lang]/dictionaries/dictionaries";
 import Link from "next/link";
 import { icons } from "./icons";
+import LanguageSwitcher from "./language-switcher";
 
 const Navbar = async ({ lang }) => {
   const dictionary = await getDictionary(lang);
@@ -37,6 +38,7 @@ const Navbar = async ({ lang }) => {
           alt="User Avatar"
           className="w-8 h-8 rounded-full"
         />
+        <LanguageSwitcher />
       </div>
     </header>
   );
